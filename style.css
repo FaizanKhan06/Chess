@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,800&display=swap');
+
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
+:root{
+    --white: rgb(238,238,210);
+    --black: rgb(118,150,86); 
+    --red: rgb(213,113,80);
+    --background: #312E2B;
+}
+
+body{
+    margin: 0;
+    background-color: var(--background);
+    scroll-behavior: smooth;
+}
+
+#GameCanvas{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 600px;
+    min-width: 205px;
+    overflow: hidden;
+    border-radius: 10px;
+    margin: auto;
+    border: 3px solid black;
+}
+
+.Square{
+    position: relative;
+    aspect-ratio: 1/1;
+}
+.BlackSquare{
+    background-color: var(--black);
+}
+.WhiteSquare{
+    background-color: var(--white);
+}
+.CheckSquare{
+    background-color: var(--red);
+}
+
+.Piece{
+    position: absolute;
+    width: 100%;
+}
+
+.Circles{
+    position: absolute;
+    width: 100%;
+    aspect-ratio: 1/1;
+    background: radial-gradient(circle, rgba(2, 2, 2, 0.33) 30%, rgba(0,0,0,0) 32%);
+}
+
+
+.AttackCircles{
+    position: absolute;
+    width: 100%;
+    border-radius: 100px;
+    aspect-ratio: 1/1;
+    background-image: radial-gradient(circle, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.33) 52%);
+}
+
+#promotion-choice{
+    background-color: rgba(38, 30, 30, 0.388);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5vw;
+    z-index: 200;
+}
+.promotionButton{
+    position: relative;
+    width: 20%;
+}
+
+#Checkmate-Screen{
+    position: fixed;
+    top: 0;
+    background-color: #0000008b;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+.Checkmate-msg{
+    position: relative;
+    font-size: 2rem;
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.Checkmate-btn{
+    padding: 10px 18px;
+    font-size: 1rem;
+    border-radius: 5px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+
+#ui{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 650px;
+    min-width: 227px;
+    margin: 10px auto;
+    overflow: hidden;
+    border-radius: 10px;
+}
+#fen_Input{
+    flex-grow: 5;
+    padding: 7px 0%;
+    background-color: #272522;
+    border-color: transparent;
+    color: white;
+    font-weight: 700;
+}
+#fen_Input:focus{
+    outline: none;
+    box-shadow: none;
+}
+.icon{
+    flex-grow: 1;
+    position: relative;
+    align-content: center;
+    background-color: #272522;
+    color: white;
+}
+.fa-solid{
+    position: relative;top: 25%;left: 40%;
+}
+.icon:hover{
+    cursor: pointer;
+    background-color: #22211f;
+}
+.icon:focus{
+    cursor: pointer;
+    background-color: #22211f;
+}
+#invalidFen{
+    width: 100%;
+    text-align: center;
+    margin: 0;
+    background-color: #272522;
+    color: white;
+    font-weight: 600;
+    padding-bottom: 7px;
+}
+
+
+/*Social*/
+.socials{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    z-index: 9999;
+}
+.socials > div{
+    padding-right: 1em;
+}
+a {
+    color: inherit;
+    text-decoration-color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    text-decoration: none;
+}
+.tooltip {
+    z-index: 2;
+    position: relative;
+    display: inline-block;
+}
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 ForkAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.tooltip .tooltiptext {
+    z-index: 2;
+    visibility: hidden;
+    width: 120px;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 2px 0;
+    position: absolute;
+    z-index: 1;
+    top: 80%;
+    left: 50%;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 1s;
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/0dc0dd2589.js" crossorigin="anonymous"></script>
+    <title>Chess</title>
+</head>
+<body>
+    <h1 style="margin: 0;text-align: center;"><span style="color: var(--white);">C</span><span style="color: var(--black);">h</span><span style="color: var(--white);">e</span><span style="color: var(--black);">s</span><span style="color: var(--white);">s</span></h1>
+    <div id="ui" style="margin-top: 0;">
+        <div class="icon" id="fen_submitBtn" onclick="">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+        <input id="fen_Input" placeholder="Enter Fen Representation Of the Board">
+        <div class="icon" id="fen_submitBtn" onclick="FenSubmit()">
+            <!--<i class="fa-solid fa-paper-plane"></i>-->
+            <i class="fa-solid fa-chess-board" style="font-size: 22px;"></i>
+        </div>
+        <p id="invalidFen" style="display: none;">Invalid Fen!!</p>
+    </div>
+
+    <div id="promotion-choice" style="display: none;">
+        <button id="queen-button" class="promotionButton">Queen</button>
+        <button id="rook-button" class="promotionButton">Rook</button>
+        <button id="bishop-button" class="promotionButton">Bishop</button>
+        <button id="knight-button" class="promotionButton">Knight</button>
+    </div>
+    <div id="Checkmate-Screen" style="display: none;">
+        <h1 class="Checkmate-msg" id="win_msg">Checkmate</h1>
+        <div>
+            <button class="Checkmate-btn" onclick="RestartGame()">Restart</button>
+            <button class="Checkmate-btn" onclick="AnalayseGame()">Analyse</button>
+        </div>
+    </div>
+      
+    <div id="GameCanvas"></div>
+    <script src="index.js"></script>
+    <script src="fen.js"></script>
+
+    <div class="socials">
+        <div>
+            <a href="https://www.linkedin.com/in/faizan-khan-311277200/">
+                <div class="tooltip">
+                    <i class="fa-brands fa-linkedin" style="font-size:20px;color:white"></i>
+                    <span class="tooltiptext">YouTube</span>
+                </div>
+            </a>
+        </div>
+        <div>
+            <a href="https://twitter.com/Khan06Faizan">
+                <div class="tooltip">
+                    <i class="fa fa-twitter" style="font-size:20px;color:white"></i>
+                    <span class="tooltiptext">Twitter</span>
+                </div>
+            </a>
+        </div>
+        <div>
+            <a href="https://github.com/FaizanKhan06">
+                <div class="tooltip">
+                    <i class="fa fa-github" style="font-size:20px;color:white"></i>
+                    <span class="tooltiptext">GitHub</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <button onclick="MoveAutomatically()" style="margin: auto;">Random Moves</button>
+      
+</body>
