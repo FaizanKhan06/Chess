@@ -75,14 +75,6 @@ Upper Case: White
 Lower Case: Black
 
 1.Starting Position: rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
-♖ ♘ ♗ ♕ ♔ ♗ ♘ ♖
-♙ ♙ ♙ ♙ ♙ ♙ ♙ ♙
-.  .  .  .  .  .  .  .
-. . . . . . . .
-. . . . . . . .
-. . . . . . . .
-♟ ♟ ♟ ♟ ♟ ♟ ♟ ♟
-♜ ♞ ♝ ♚ ♛ ♝ ♞ ♜
 
         R  N  B  Q  K  B  N  R
         P  P  P  P  P  P  P  P
