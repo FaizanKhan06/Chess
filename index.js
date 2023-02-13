@@ -141,14 +141,7 @@ class Piece{
         if(Piece.color == PlayerTurn){
                 
             //Yellow Color Over The Clicked Piece;
-            if(ClickedPiece!=null){
-                ClickedPiece.boardPrefab.style.backgroundColor = "";
-            }
-            if(PrevLocationOfClickedPiece!=null){
-                PrevLocationOfClickedPiece.boardPrefab.style.backgroundColor = "";
-            }
-            ClickedPiece = Square[Piece.file][Piece.rank];
-            ClickedPiece.boardPrefab.style.backgroundColor =  (ClickedPiece.color=="Black") ? "rgb(186, 202, 43)" : "rgb(246, 246, 105)";
+            Piece.ColorThePiecesLocationOnMove();
 
             if(Piece.isSlidingPiece){
                 steps = Piece.slidingPieceSteps();
@@ -171,6 +164,17 @@ class Piece{
             }
         }
         return steps;
+    }
+
+    ColorThePiecesLocationOnMove(){
+        if(ClickedPiece!=null){
+            ClickedPiece.boardPrefab.style.backgroundColor = "";
+        }
+        if(PrevLocationOfClickedPiece!=null){
+            PrevLocationOfClickedPiece.boardPrefab.style.backgroundColor = "";
+        }
+        ClickedPiece = Square[this.file][this.rank];
+        ClickedPiece.boardPrefab.style.backgroundColor =  (ClickedPiece.color=="Black") ? "rgb(186, 202, 43)" : "rgb(246, 246, 105)";
     }
 
     slidingPieceSteps(){
@@ -579,16 +583,16 @@ function returnTurnOppositeColor(){
     return (PlayerTurn == "White")? "Black" : "White";
 }
 
-function UnmakeMove(){
-    if(currentMove!=null){
-        currentMove.piece.changePieceLocation(currentMove.startSquare.file,currentMove.startSquare.rank,currentMove);
-        if(currentMove.AttackedPiece!=null){
-            //let piece = new Piece(currentMove.AttackedPiece.file, currentMove.AttackedPiece.rank, currentMove.AttackedPiece.piece, currentMove.AttackedPiece.color);
-            //console.log(currentMove.AttackedPiece);
-            currentMove.AttackedPiece.addPieceToBoard();
+function newUnmakeMove(move){
+    if(move!=null){
+        move.piece.changePieceLocation(move.startSquare.file,move.startSquare.rank,move);
+        if(move.AttackedPiece!=null){
+            //let piece = new Piece(move.AttackedPiece.file, move.AttackedPiece.rank, move.AttackedPiece.piece, move.AttackedPiece.color);
+            //console.log(move.AttackedPiece);
+            move.AttackedPiece.addPieceToBoard();
 
         }
-        currentMove = null;
+        move = null;
     }
 }
 
@@ -657,8 +661,9 @@ function GenerateLegalMoves(){
         if(!bool){
             legalMoves.push(moveToVerify);
         }
-           
-        UnmakeMove();
+
+        //console.log(currentMove);
+        newUnmakeMove(moveToVerify);
         
     });
     let intersection1 = pseudoLegalMoves.filter(x => !legalMoves.includes(x));
@@ -795,29 +800,28 @@ async function chooseChessPiece(piece) {
     }
 }  
 
+
+
+
+
+
+
 //Random Moves AI
 let ai = false;
-//MoveAutomatically();
 function MoveAutomatically(){
     if(!CheckMate && !Stalemate && fiftyMoveRule<100){
         ai = true;
+
+        //
         setTimeout(function() {
             MoveAutomatically();
-        }, 500);
-        
-        let steps;
-        let piece;
-        do{
-            do {
-                let selectRandomNumber = getRandomNumber(0,Pieces.length-1);
-                piece = Pieces[selectRandomNumber];
-            } while (piece.color != PlayerTurn);
-            steps = piece.selectingPiece();
-        } while(steps.length<=0);
-    
-        let randomStep = steps[getRandomNumber(0,steps.length-1)];
-    
-        MoveOnClick(randomStep,piece);
+        }, 10);
+
+        let availableMoves = GenerateLegalMoves();
+
+        let selectRandomMove = availableMoves[getRandomNumber(0,availableMoves.length-1)];
+        selectRandomMove.piece.ColorThePiecesLocationOnMove();
+        MoveOnClick(selectRandomMove,selectRandomMove.piece);
     }
 }
 
@@ -853,3 +857,53 @@ function RestartGame(){
 function AnalayseGame(){
     document.getElementById("Checkmate-Screen").style.display = "none";
 }
+
+
+
+
+
+//Proper AI
+/*
+const pawnValue = 100;
+const knightValue = 300;
+const bishopValue = 300;
+const rookValue = 500;
+const queenValue = 900;
+
+
+function Evaluate(){
+    let whiteEval = CountMaterial("White");
+    let blackEval = CountMaterial("Black");
+
+    let evaluation = whiteEval - blackEval;
+
+    let perspective = (PlayerTurn == "White") ? 1 : -1;
+    return evaluation * perspective;
+}
+
+function CountMaterial(color){
+    let material = 0;
+    Pieces.forEach(piece => {
+        if(piece.color == color){
+            switch (piece.piece) {
+                case "Pawn":material+=pawnValue;break;
+                case "Knight":material+=knightValue;break;
+                case "Bishop":material+=bishopValue;break;
+                case "Rook":material+=rookValue;break;
+                case "Queen":material+=queenValue;break;
+            }
+        }
+    });
+
+    return material;
+}
+
+function search(depth) {
+    if(depth == 0){
+        return Evaluate();
+    }
+
+    let moves = GenerateMoves();
+}
+
+*/
