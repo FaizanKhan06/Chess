@@ -108,8 +108,6 @@ class Piece{
         Square[this.file][this.rank].piece = this;
         //Change Player Turn
         changeTurnFunction();
-
-        currentMove = move;
         
         removeHighlightedCircles();
     }
@@ -241,7 +239,7 @@ let fiftyMoveRule = 0;
 
 const higligtedMovesVisualizer = [];
 
-let currentMove = null;
+let aiSpeed = 100;
 
 let CheckBoardPiece = {"Black":null,"White":null};
 
@@ -563,7 +561,6 @@ function MoveOnClick(eachStep,piece){
     }
     PrevLocationOfClickedPiece = Square[piece.file][piece.rank];
     PrevLocationOfClickedPiece.boardPrefab.style.backgroundColor = (PrevLocationOfClickedPiece.color=="Black") ? "rgb(186, 202, 43)" : "rgb(246, 246, 105)";
-    currentMove = eachStep;
 
     checked = false;
 }
@@ -661,8 +658,6 @@ function GenerateLegalMoves(){
         if(!bool){
             legalMoves.push(moveToVerify);
         }
-
-        //console.log(currentMove);
         newUnmakeMove(moveToVerify);
         
     });
@@ -815,7 +810,7 @@ function MoveAutomatically(){
         //
         setTimeout(function() {
             MoveAutomatically();
-        }, 10);
+        }, aiSpeed);
 
         let availableMoves = GenerateLegalMoves();
 
@@ -864,12 +859,14 @@ function AnalayseGame(){
 
 //Proper AI
 /*
-const pawnValue = 100;
-const knightValue = 300;
-const bishopValue = 300;
-const rookValue = 500;
-const queenValue = 900;
+const pawnValue = 1;
+const knightValue = 3;
+const bishopValue = 3;
+const rookValue = 5;
+const queenValue = 9;
+const kingValue = 90;
 
+console.log(Evaluate());
 
 function Evaluate(){
     let whiteEval = CountMaterial("White");
@@ -897,13 +894,19 @@ function CountMaterial(color){
 
     return material;
 }
-
-function search(depth) {
-    if(depth == 0){
-        return Evaluate();
-    }
-
-    let moves = GenerateMoves();
-}
-
 */
+
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    const slider = document.getElementById("mySlider");
+    const sliderValue = document.getElementById("sliderValue");
+  
+    sliderValue.innerHTML = slider.value;
+  
+    slider.oninput = function() {
+      sliderValue.innerHTML = this.value;
+      aiSpeed = this.value
+    }
+  });
+  

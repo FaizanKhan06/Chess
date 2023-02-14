@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover,user-scalable=no">
     <link rel="stylesheet" href="style.css">
     <script src="https://kit.fontawesome.com/0dc0dd2589.js" crossorigin="anonymous"></script>
     <title>Chess</title>
@@ -64,6 +64,13 @@
         </div>
     </div>
 
-    <button onclick="MoveAutomatically()" style="margin: auto;">Random Moves</button>
+    <p onclick="MoveAutomatically()" style="max-width: 600px;min-width: 215px;position: relative;margin: auto;text-align: center;margin-top: 10px;background-color: #272522;color: white;padding: 10px 0px;margin-bottom: 10px;border-radius: 10px;">Random Moves</p>
+    
+    <div style="position: relative;display: flex;flex-wrap: wrap;max-width: 600px;min-width: 215px;margin: auto;">
+        <span style="color: white;">Speed:</span>
+        <input type="range" min="10" max="1000" value="100" class="slider" id="mySlider" style="position: relative;flex-grow: 2;">
+        <span id="sliderValue" style="position: relative;color: white;">100</span>
+    </div>
+      
       
 </body>
