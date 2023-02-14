@@ -908,5 +908,5 @@ document.addEventListener("DOMContentLoaded", function() {
       sliderValue.innerHTML = this.value;
       aiSpeed = this.value
     }
-  });
+});
   
