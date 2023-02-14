@@ -19,6 +19,14 @@
         <p id="invalidFen" style="display: none;">Invalid Fen!!</p>
     </div>
 
+    <p onclick="MoveAutomatically()" style="max-width: 600px;min-width: 215px;position: relative;margin: auto;text-align: center;margin-top: 10px;background-color: #272522;color: white;padding: 4px 0px;margin-bottom: 3px;border-radius: 10px;">Random Moves</p>
+    
+    <div style="padding-bottom: 10px;position: relative;display: flex;flex-wrap: wrap;max-width: 600px;min-width: 215px;margin: auto;">
+        <span style="color: white;">Speed:</span>
+        <input type="range" min="10" max="1000" value="100" class="slider" id="mySlider" style="position: relative;flex-grow: 2;">
+        <span id="sliderValue" style="position: relative;color: white;">100</span>
+    </div>
+
     <div id="promotion-choice" style="display: none;">
         <button id="queen-button" class="promotionButton">Queen</button>
         <button id="rook-button" class="promotionButton">Rook</button>
@@ -62,14 +70,6 @@
                 </div>
             </a>
         </div>
-    </div>
-
-    <p onclick="MoveAutomatically()" style="max-width: 600px;min-width: 215px;position: relative;margin: auto;text-align: center;margin-top: 10px;background-color: #272522;color: white;padding: 10px 0px;margin-bottom: 10px;border-radius: 10px;">Random Moves</p>
-    
-    <div style="position: relative;display: flex;flex-wrap: wrap;max-width: 600px;min-width: 215px;margin: auto;">
-        <span style="color: white;">Speed:</span>
-        <input type="range" min="10" max="1000" value="100" class="slider" id="mySlider" style="position: relative;flex-grow: 2;">
-        <span id="sliderValue" style="position: relative;color: white;">100</span>
     </div>
       
       
