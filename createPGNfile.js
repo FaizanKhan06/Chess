@@ -4,7 +4,7 @@ function createPGN(){
     let textarea = document.createElement('textarea');
     document.getElementById("pngmaindisplay").appendChild(textarea);
 
-    let string = "[Event \"Faizan's Chess Championship\"]\n[Site \"https://faizankhan06.github.io/Chess\"]\n[Date \"????.??.??\"]\n[Round \"?\"]\n[White \"?\"]\n[Black \"?\"]\n[Result \"*\"]\n";
+    let string = "[Event \"Faizan's Chess Championship\"]\n[Site \"https://faizankhan06.github.io/Chess\"]\n[Date \"????.??.??\"]\n[Round \"?\"]\n[White \"?\"]\n[Black \"?\"]\n[Result \"*\"]\n\n";
     playedMoves.forEach(move => {
         string = string+move;
     });
