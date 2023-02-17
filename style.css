@@ -222,6 +222,7 @@ a {
     height: 500px;
     background-color: var(--movesColorDark);
     margin: 10px auto;
+    margin-bottom: 30px;
     text-align: center;
     color: white;
     
