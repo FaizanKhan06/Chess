@@ -121,7 +121,7 @@ class Piece{
     addEventListnerToEachPiece(Piece){
         Piece.PieceImg.addEventListener("click", function() {
             
-            Piece.selectingPiece();
+            Piece.selectingPieceToMove();
             
         });
     }
@@ -133,7 +133,7 @@ class Piece{
         fiftyMoveRule = 0;
     }
 
-    selectingPiece(){
+    selectingPieceToMove(){
         let Piece = this;
         let steps = [];
         if(Piece.color == PlayerTurn){
@@ -141,27 +141,15 @@ class Piece{
             //Yellow Color Over The Clicked Piece;
             Piece.ColorThePiecesLocationOnMove();
 
-            if(Piece.isSlidingPiece){
-                steps = Piece.slidingPieceSteps();
-                DisplaySteps(Piece.slidingPieceSteps(),Piece);
-            }
+            let legalMoves = GenerateLegalMoves();
 
-            if(Piece.isKingPiece){
-                steps = Piece.kingPieceSteps();
-                DisplaySteps(Piece.kingPieceSteps(),Piece);
-            }
-
-            if(Piece.isKnightPiece){
-                steps = Piece.knightPieceSteps();
-                DisplaySteps(Piece.knightPieceSteps(),Piece);
-            }
-
-            if(Piece.isPawnPiece){
-                steps = Piece.pawnPieceSteps();
-                DisplaySteps(Piece.pawnPieceSteps(),Piece);
-            }
+            legalMoves.forEach(moves => {
+                if(moves.piece == Piece){
+                    steps.push(moves);
+                }
+            });
+            DisplaySteps(steps,Piece);
         }
-        return steps;
     }
 
     ColorThePiecesLocationOnMove(){
@@ -173,34 +161,6 @@ class Piece{
         }
         ClickedPiece = Square[this.file][this.rank];
         ClickedPiece.boardPrefab.style.backgroundColor =  (ClickedPiece.color=="Black") ? "rgb(186, 202, 43)" : "rgb(246, 246, 105)";
-    }
-
-    slidingPieceSteps(){
-        let Piece = this;
-        let steps = GenerateSlidingMoves(Piece.file,Piece.rank,true);
-        steps = compareAndReturn(steps);
-        return steps;
-    }
-
-    kingPieceSteps(){
-        let Piece = this;
-        let steps = GenerateSlidingMovesForKing(Piece.file,Piece.rank,true);
-        steps = compareAndReturn(steps);
-        return steps;
-    }
-
-    knightPieceSteps(){
-        let Piece = this;
-        let steps = GenerateKnightMoves(Piece.file,Piece.rank,true);
-        steps = compareAndReturn(steps);
-        return steps;
-    }
-
-    pawnPieceSteps(){
-        let Piece = this;
-        let steps = GeneratePawnMoves(Piece.file,Piece.rank,true);
-        steps = compareAndReturn(steps);
-        return steps;
     }
 }
 
@@ -512,6 +472,8 @@ function DisplaySteps(steps,piece){
 
 function MoveOnClick(eachStep,piece){
 
+    showPlayedMoves(eachStep);
+
     if(piece.piece=="Pawn"){
         fiftyMoveRule = 0;
     }else{
@@ -687,13 +649,6 @@ function checkForCastling(fen) {
     }
 }
 
-function compareAndReturn(steps){
-    if(steps.length>0){
-        steps = steps.filter(element1 => GenerateLegalMoves().some(element2 => element1.isEqual(element2)));
-    }
-    return steps;
-}
-
 function GenerateThreatMaps(){
     //Generating All The possible attack Positions by the Opposite Player
     let moves = [];
@@ -851,6 +806,66 @@ function RestartGame(){
 
 function AnalayseGame(){
     document.getElementById("Checkmate-Screen").style.display = "none";
+}
+
+
+let movesCounter = 0;
+const table = document.getElementById("tableMoves");
+function showPlayedMoves(move){
+    if(PlayerTurn == "White"){
+        movesCounter++;
+        
+        let row = document.createElement('tr');
+        row.classList.add("movesRow");
+        row.id = "movesRow"+movesCounter;
+        
+        let Rowno = document.createElement('td');
+        let Row1stMove = document.createElement('td');
+        let Row2stMove = document.createElement('td');
+
+        row.appendChild(Rowno);
+        row.appendChild(Row1stMove);
+        row.appendChild(Row2stMove);
+
+        table.appendChild(row);
+
+        createCellsForMoves(movesCounter+".");
+    }
+    //display moves
+    let alphaValuesRank = ["a","b","c","d","e","f","g","h"];
+    let pieceValues = {"Pawn":"","Rook":"R","Bishop":"B","Knight":"N","Queen":"Q","King":"K"};
+
+    if(move.AttackedPiece == null){
+        let text = (pieceValues[move.piece.piece] + alphaValuesRank[move.targetSquare.rank] + (move.targetSquare.file+1));
+        createCellsForMoves(text);
+    }
+    else{
+        if(move.piece.piece == "Pawn"){
+            text = (alphaValuesRank[move.startSquare.rank] + "x" + alphaValuesRank[move.targetSquare.rank] + (move.targetSquare.file+1));
+            createCellsForMoves(text);
+        }
+        else{
+            text = (pieceValues[move.piece.piece] + "x" + alphaValuesRank[move.targetSquare.rank] + (move.targetSquare.file+1));
+            createCellsForMoves(text);
+        }
+    }
+}
+function createCellsForMoves(text){
+    let rowChilds = document.getElementById("movesRow"+movesCounter).childNodes;
+    let cell = null;
+    if(rowChilds[0].textContent == ""){
+        console.log(rowChilds[0]);
+        cell = rowChilds[0];
+    }else if(rowChilds[1].textContent == ""){
+        console.log(rowChilds[1]);
+        cell = rowChilds[1];
+    }
+    else{
+        console.log(rowChilds[2]);
+        cell = rowChilds[2];
+    }
+    cell.classList.add("movesCol");
+    cell.textContent = text;
 }
 
 
