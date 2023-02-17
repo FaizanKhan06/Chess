@@ -9,6 +9,10 @@
     --black: rgb(118,150,86); 
     --red: rgb(213,113,80);
     --background: #312E2B;
+
+    --movesColorDark: #363636;
+    --movesColorLight:#969696;
+
 }
 
 body{
@@ -208,3 +212,40 @@ a {
     opacity: 0;
     transition: opacity 1s;
 }
+
+
+
+/*Moves Displayer*/
+#movesHandler{
+    max-width: 400px;
+    min-width: 205px;
+    height: 500px;
+    background-color: var(--movesColorDark);
+    margin: 10px auto;
+    text-align: center;
+    color: white;
+    
+    
+    overflow: auto;
+    border-radius: 10px;
+    scroll-behavior: smooth;
+}
+
+  
+.movesTable{
+    border-collapse: collapse;
+    border: none;
+    outline: none;
+    width: 100%;
+    margin: auto;
+}
+.movesRow:nth-child(even) {
+    background-color: var(--movesColorDark);
+}
+.movesRow:nth-child(odd) {    
+    background-color: var(--movesColorLight);
+}
+.movesCol{
+    padding: 5px 0;
+    width: 33%;
+    }
