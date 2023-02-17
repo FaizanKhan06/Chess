@@ -12,7 +12,6 @@
 
     --movesColorDark: #363636;
     --movesColorLight:#969696;
-
 }
 
 body{
@@ -83,6 +82,7 @@ body{
     position: relative;
     width: 20%;
 }
+
 
 #Checkmate-Screen{
     position: fixed;
@@ -229,9 +229,7 @@ a {
     overflow: auto;
     border-radius: 10px;
     scroll-behavior: smooth;
-}
-
-  
+}  
 .movesTable{
     border-collapse: collapse;
     border: none;
@@ -248,4 +246,55 @@ a {
 .movesCol{
     padding: 5px 0;
     width: 33%;
+}
+
+/*PNG Displayer*/
+#pngDisplayer{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    background-color: #22211f4f;
+    color: white;
+    display: none;
+}
+.pgndiv{
+    position: relative;
+    margin: auto;
+    max-width: 400px;
+    min-width: 205px;
+    height: fit-content;
+    background-color: var(--background);
+}
+#pngmaindisplay{
+    font-size: 11px;
+    position: relative;
+    width: 85%;
+    margin: auto;
+    height: 150px;
+}
+textarea{
+    width: 100%;
+    height: 100%;
+    background-color: #22211f;
+    color: white;
+}
+.pgnBTN{
+    display: block;
+    max-width: 600px;
+    min-width: 215px;
+    position: relative;
+    margin: auto;
+    text-align: center;
+    margin-top: 10px;
+    background-color: #272522;
+    color: white;
+    padding: 4px 0px;
+    margin-bottom: 3px;
+    border-radius: 10px;
+    border: none;
+}
+.pgnBTN:hover{
+    cursor: pointer;
+    background-color: #22211f;
 }
