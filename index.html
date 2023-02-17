@@ -19,7 +19,7 @@
         <p id="invalidFen" style="display: none;">Invalid Fen!!</p>
     </div>
 
-    <p onclick="MoveAutomatically()" style="max-width: 600px;min-width: 215px;position: relative;margin: auto;text-align: center;margin-top: 10px;background-color: #272522;color: white;padding: 4px 0px;margin-bottom: 3px;border-radius: 10px;">Random Moves</p>
+    <button onclick="MoveAutomatically()" class="pgnBTN">Random Moves</button>
     
     <div style="padding-bottom: 10px;position: relative;display: flex;flex-wrap: wrap;max-width: 600px;min-width: 215px;margin: auto;">
         <span style="color: white;">Speed:</span>
@@ -77,8 +77,21 @@
         </div>
     </div>
 
+    <button onclick="createPGN()" class="pgnBTN">PGN</button>
+
+    <div id="pngDisplayer">
+        <div class="pgndiv">
+            <h3 style="text-align: center;padding-top: 18px;">PGN</h3>
+            <div id="pngmaindisplay">
+            </div>
+            <div style="height: 18px;"></div>
+        </div>
+        <button onclick="closePGNLayout()" class="pgnBTN">Close</button>
+    </div>
+
     
     <script src="index.js"></script>
+    <script src="createPGNfile.js"></script>
     <script src="fen.js"></script>
       
       

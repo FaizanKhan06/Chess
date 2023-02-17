@@ -808,8 +808,21 @@ function AnalayseGame(){
     document.getElementById("Checkmate-Screen").style.display = "none";
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+    const slider = document.getElementById("mySlider");
+    const sliderValue = document.getElementById("sliderValue");
+  
+    sliderValue.innerHTML = slider.value;
+  
+    slider.oninput = function() {
+      sliderValue.innerHTML = this.value;
+      aiSpeed = this.value
+    }
+});
+
 
 let movesCounter = 0;
+const playedMoves = [];
 const table = document.getElementById("tableMoves");
 function showPlayedMoves(move){
     if(PlayerTurn == "White"){
@@ -829,23 +842,24 @@ function showPlayedMoves(move){
 
         table.appendChild(row);
 
-        createCellsForMoves(movesCounter+".");
+        createCellsForMoves(movesCounter+". ");
     }
     //display moves
     let alphaValuesRank = ["a","b","c","d","e","f","g","h"];
+    let alphaValuesFile = ["8","7","6","5","4","3","2","1"];
     let pieceValues = {"Pawn":"","Rook":"R","Bishop":"B","Knight":"N","Queen":"Q","King":"K"};
 
     if(move.AttackedPiece == null){
-        let text = (pieceValues[move.piece.piece] + alphaValuesRank[move.targetSquare.rank] + (move.targetSquare.file+1));
+        let text = (pieceValues[move.piece.piece] + alphaValuesRank[move.targetSquare.rank] + (alphaValuesFile[move.targetSquare.file]) + " ");
         createCellsForMoves(text);
     }
     else{
         if(move.piece.piece == "Pawn"){
-            text = (alphaValuesRank[move.startSquare.rank] + "x" + alphaValuesRank[move.targetSquare.rank] + (move.targetSquare.file+1));
+            text = (alphaValuesRank[move.startSquare.rank] + "x" + alphaValuesRank[move.targetSquare.rank] + (alphaValuesFile[move.targetSquare.file]) + " ");
             createCellsForMoves(text);
         }
         else{
-            text = (pieceValues[move.piece.piece] + "x" + alphaValuesRank[move.targetSquare.rank] + (move.targetSquare.file+1));
+            text = (pieceValues[move.piece.piece] + "x" + alphaValuesRank[move.targetSquare.rank] + (alphaValuesFile[move.targetSquare.file]) + " ");
             createCellsForMoves(text);
         }
     }
@@ -854,19 +868,18 @@ function createCellsForMoves(text){
     let rowChilds = document.getElementById("movesRow"+movesCounter).childNodes;
     let cell = null;
     if(rowChilds[0].textContent == ""){
-        console.log(rowChilds[0]);
         cell = rowChilds[0];
     }else if(rowChilds[1].textContent == ""){
-        console.log(rowChilds[1]);
         cell = rowChilds[1];
     }
     else{
-        console.log(rowChilds[2]);
         cell = rowChilds[2];
     }
+    playedMoves.push(text);
     cell.classList.add("movesCol");
     cell.textContent = text;
 }
+  
 
 
 
@@ -910,18 +923,3 @@ function CountMaterial(color){
     return material;
 }
 */
-
-
-
-document.addEventListener("DOMContentLoaded", function() {
-    const slider = document.getElementById("mySlider");
-    const sliderValue = document.getElementById("sliderValue");
-  
-    sliderValue.innerHTML = slider.value;
-  
-    slider.oninput = function() {
-      sliderValue.innerHTML = this.value;
-      aiSpeed = this.value
-    }
-});
-  
